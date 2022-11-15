@@ -36,12 +36,10 @@ pipeline {
                 git clone https://github.com/herimendoza/kuralabs_deployment_5.git
                 sleep 2
                 cd kuralabs_deployment_5/
+                docker pull python
+                docker build -t heripotter/deploy5 .
 
                 '''
-                // docker build from dockerfile
-                // use base python image
-                // copy source code tar
-                // docker build (builds new image from dockerfile)
 
             }
         }
@@ -50,6 +48,9 @@ pipeline {
             steps {
                 // create repo beforehand
                 // push container to dockerhub (docker push heripotter/<container>)
+                sh '''#!/bin/bash
+                docker push heripotter/deploy5
+                '''
 
             }
         }
