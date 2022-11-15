@@ -63,16 +63,37 @@ pipeline {
         stage ('Deploy to ECS') {
             agent{label 'terraformAgent'}
             steps {
-                // do i need terraform init plan apply? maybe 3 steps?
+                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
+                    dir('intTerraform') {
+                        sh '''#!/bin/bash
+                        terraform init
+                        terraform plan -out plan.tfplan -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"
+                        terraform apply plan.tfplan
+                        '''
+                    }
+                }
 
             }
         }
         stage ('Destroy Infrastructure') {
             agent{label 'terraformAgent'}
             steps {
-                // terraform destroy
-
+                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
+                    dir('intTerraform') {
+                        sh '''#!/bin/bash
+                        terraform destroy -auto-approve -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"
+                        '''
+                    }
+                }
             }
+        }
+    }
+    post{
+        always{
+            emailext to: "heri.mendoza9@gmail.com",
+            subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
+            body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+            attachLog: true
         }
     }
 }
