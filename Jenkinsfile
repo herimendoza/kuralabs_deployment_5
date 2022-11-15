@@ -75,6 +75,7 @@ pipeline {
 
             }
         }
+        /*
         stage ('Destroy Infrastructure') {
             agent{label 'terraformAgent'}
             steps {
@@ -87,6 +88,7 @@ pipeline {
                 }
             }
         }
+        */
     }
     post{
         always{
