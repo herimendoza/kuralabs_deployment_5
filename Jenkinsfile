@@ -39,6 +39,9 @@ pipeline {
                 tar --exclude='./Documentation' --exclude='./Jenkinsfile' --exclude='./READEME.md' --exclude='./intTerraform/' --exclude='./test_app.py' --exclude='./dockerfile' -cvf url_app.tar.gz .
                 sudo docker pull python
                 sudo docker build -t heripotter/deploy5 .
+                sleep 10
+                cd ..
+                rm -rf kuralabs_deployment_5/
 
                 '''
 
@@ -49,8 +52,10 @@ pipeline {
             steps {
                 // create repo beforehand
                 // push container to dockerhub (docker push heripotter/<container>)
+                // delete local image
                 sh '''#!/bin/bash
-                docker push heripotter/deploy5
+                sudo docker push heripotter/deploy5:latest
+                sudo docker rmi heripotter/deploy5:latest
                 '''
 
             }
@@ -68,15 +73,6 @@ pipeline {
                 // terraform destroy
 
             }
-        }
-        stage ('Clean Up') {
-            agent{label 'dockerAgent'}
-            steps {
-                // docker - remove images -- containers are destroyed with ecs
-                // cannot create images and conainers with same name?
-
-            }
-
         }
     }
 }
