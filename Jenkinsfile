@@ -38,15 +38,17 @@ pipeline {
                 cd kuralabs_deployment_5/
 
                 '''
+                // docker build from dockerfile
                 // use base python image
-                // build new container with source code
-                // create new image from container (docker commit)
+                // copy source code tar
+                // docker build (builds new image from dockerfile)
 
             }
         }
         stage ('Push to Dockerhub') {
             agent{label 'dockerAgent'}
             steps {
+                // create repo beforehand
                 // push container to dockerhub (docker push heripotter/<container>)
 
             }
