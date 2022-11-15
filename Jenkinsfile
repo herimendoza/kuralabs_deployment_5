@@ -29,20 +29,43 @@ pipeline {
         stage ('Create Container') {
             agent{label 'dockerAgent'}
             steps {
+                // script here
+                // download source code
+                // use base python image
+                // build new container with source code
+                // create new image from container (docker commit)
 
             }
         }
         stage ('Push to Dockerhub') {
             agent{label 'dockerAgent'}
             steps {
+                // push container to dockerhub (docker push heripotter/<container>)
 
             }
         }
         stage ('Deploy to ECS') {
             agent{label 'terraformAgent'}
             steps {
+                // do i need terraform init plan apply? maybe 3 steps?
 
             }
+        }
+        stage ('Destroy Infrastructure') {
+            agent{label 'terraformAgent'}
+            steps {
+                // terraform destroy
+
+            }
+        }
+        stage ('Clean Up') {
+            agent{label 'dockerAgent'}
+            steps {
+                // docker - remove images and containers
+                // cannot create images and conainers with same name
+
+            }
+
         }
     }
 }
