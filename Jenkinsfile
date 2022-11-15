@@ -37,8 +37,8 @@ pipeline {
                 sleep 2
                 cd kuralabs_deployment_5/
                 tar --exclude='./Documentation' --exclude='./Jenkinsfile' --exclude='./READEME.md' --exclude='./intTerraform/' --exclude='./test_app.py' --exclude='./dockerfile' -cvf url_app.tar.gz .
-                docker pull python
-                docker build -t heripotter/deploy5 .
+                sudo docker pull python
+                sudo docker build -t heripotter/deploy5 .
 
                 '''
 
