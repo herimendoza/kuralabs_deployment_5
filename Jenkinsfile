@@ -29,8 +29,15 @@ pipeline {
         stage ('Create Container') {
             agent{label 'dockerAgent'}
             steps {
-                // script here
-                // download source code
+                sh '''#!/bin/bash
+                sudo apt update
+                sudo apt -y install git
+                sleep 3
+                git clone https://github.com/herimendoza/kuralabs_deployment_5.git
+                sleep 2
+                cd kuralabs_deployment_5/
+
+                '''
                 // use base python image
                 // build new container with source code
                 // create new image from container (docker commit)
