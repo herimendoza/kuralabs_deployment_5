@@ -36,6 +36,7 @@ pipeline {
                 git clone https://github.com/herimendoza/kuralabs_deployment_5.git
                 sleep 2
                 cd kuralabs_deployment_5/
+                tar --exclude='./Documentation' --exclude='./Jenkinsfile' --exclude='./READEME.md' --exclude='./intTerraform/' --exclude='./test_app.py' --exclude='./dockerfile' -cvf url_app.tar.gz .
                 docker pull python
                 docker build -t heripotter/deploy5 .
 
@@ -71,8 +72,8 @@ pipeline {
         stage ('Clean Up') {
             agent{label 'dockerAgent'}
             steps {
-                // docker - remove images and containers
-                // cannot create images and conainers with same name
+                // docker - remove images -- containers are destroyed with ecs
+                // cannot create images and conainers with same name?
 
             }
 
