@@ -42,6 +42,7 @@ pipeline {
                 sleep 10
                 cd ..
                 rm -rf kuralabs_deployment_5/
+                rm -rf url_app.tar.gz
 
                 '''
 
