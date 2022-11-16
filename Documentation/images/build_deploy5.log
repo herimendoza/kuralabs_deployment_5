@@ -1,0 +1,1205 @@
+Started by user Heri Ortega
+Connecting to https://api.github.com using herimendoza/****** (Github Token)
+Obtained Jenkinsfile from 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/url_shortener_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential b16544b0-0929-4909-a0ed-8251aa2c38df
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/url_shortener_main/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/herimendoza/kuralabs_deployment_5.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/herimendoza/kuralabs_deployment_5.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+using GIT_ASKPASS to set credentials Github Token
+ > git fetch --no-tags --force --progress -- https://github.com/herimendoza/kuralabs_deployment_5.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+Checking out Revision 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab # timeout=10
+Commit message: "fixed test"
+ > git rev-list --no-walk e8c7e61fb10235f2f6caa22fc3a94b1aa3c64131 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Buiild)
+[Pipeline] sh
+Requirement already satisfied: pip in ./test3/lib/python3.10/site-packages (22.3.1)
+Requirement already satisfied: attrs==22.1.0 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 2)) (22.1.0)
+Requirement already satisfied: click==8.1.3 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 3)) (8.1.3)
+Requirement already satisfied: flask==2.2.2 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 4)) (2.2.2)
+Requirement already satisfied: iniconfig==1.1.1 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 5)) (1.1.1)
+Requirement already satisfied: itsdangerous==2.1.2 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 6)) (2.1.2)
+Requirement already satisfied: jinja2==3.1.2 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 7)) (3.1.2)
+Requirement already satisfied: markupsafe==2.1.1 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 8)) (2.1.1)
+Requirement already satisfied: packaging==21.3 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 9)) (21.3)
+Requirement already satisfied: pluggy==1.0.0 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 10)) (1.0.0)
+Requirement already satisfied: py==1.11.0 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 11)) (1.11.0)
+Requirement already satisfied: pyparsing==3.0.9 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 12)) (3.0.9)
+Requirement already satisfied: pytest==7.1.2 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 13)) (7.1.2)
+Requirement already satisfied: tomli==2.0.1 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 14)) (2.0.1)
+Requirement already satisfied: werkzeug==2.2.2 in ./test3/lib/python3.10/site-packages (from -r requirements.txt (line 15)) (2.2.2)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
+============================= test session starts ==============================
+platform linux -- Python 3.10.6, pytest-7.1.2, pluggy-1.0.0 -- /var/lib/jenkins/workspace/url_shortener_main/test3/bin/python3
+cachedir: .pytest_cache
+rootdir: /var/lib/jenkins/workspace/url_shortener_main
+collecting ... collected 1 item
+
+test_app.py::test_quick PASSED                                           [100%]
+
+- generated xml file: /var/lib/jenkins/workspace/url_shortener_main/test-reports/results.xml -
+============================== 1 passed in 0.20s ===============================
+Post stage
+[Pipeline] junit
+Recording test results
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Create Container)
+[Pipeline] node
+Running on dockerAgent in /home/ubuntu/agent/workspace/url_shortener_main
+[Pipeline] {
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential b16544b0-0929-4909-a0ed-8251aa2c38df
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/herimendoza/kuralabs_deployment_5.git
+ > git init /home/ubuntu/agent/workspace/url_shortener_main # timeout=10
+Fetching upstream changes from https://github.com/herimendoza/kuralabs_deployment_5.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+using GIT_ASKPASS to set credentials Github Token
+ > git fetch --no-tags --force --progress -- https://github.com/herimendoza/kuralabs_deployment_5.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+Avoid second fetch
+Checking out Revision 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab (main)
+ > git config remote.origin.url https://github.com/herimendoza/kuralabs_deployment_5.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/main:refs/remotes/origin/main # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab # timeout=10
+Commit message: "fixed test"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Hit:4 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:5 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [714 kB]
+Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [161 kB]
+Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [10.8 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [440 kB]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [67.5 kB]
+Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [584 B]
+Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [748 kB]
+Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [123 kB]
+Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [7260 B]
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [465 kB]
+Get:16 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [103 kB]
+Get:17 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [376 kB]
+Get:18 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [609 kB]
+Get:19 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [78.2 kB]
+Get:20 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4192 B]
+Fetched 4232 kB in 2s (2367 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+4 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.34.1-1ubuntu1.5).
+git set to manually installed.
+The following packages were automatically installed and are no longer required:
+  libflashrom1 libftdi1-2
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 4 not upgraded.
+Cloning into 'kuralabs_deployment_5'...
+./
+./intTerraform/
+./intTerraform/main.tf
+./intTerraform/vpc.tf
+./intTerraform/ALB.tf
+./intTerraform/variables.tf
+./README.md
+./application.py
+./templates/
+./templates/base.html
+./templates/your_url.html
+./templates/home.html
+./templates/page_not_found.html
+tar: ./url_app.tar.gz: file is the archive; not dumped
+./.git/
+./.git/logs/
+./.git/logs/HEAD
+./.git/logs/refs/
+./.git/logs/refs/heads/
+./.git/logs/refs/heads/main
+./.git/logs/refs/remotes/
+./.git/logs/refs/remotes/origin/
+./.git/logs/refs/remotes/origin/HEAD
+./.git/info/
+./.git/info/exclude
+./.git/packed-refs
+./.git/HEAD
+./.git/objects/
+./.git/objects/info/
+./.git/objects/pack/
+./.git/objects/pack/pack-8fdaf249f3b8d641c5a9c1d48fd2b406d23dd406.idx
+./.git/objects/pack/pack-8fdaf249f3b8d641c5a9c1d48fd2b406d23dd406.pack
+./.git/index
+./.git/hooks/
+./.git/hooks/pre-push.sample
+./.git/hooks/prepare-commit-msg.sample
+./.git/hooks/applypatch-msg.sample
+./.git/hooks/pre-applypatch.sample
+./.git/hooks/commit-msg.sample
+./.git/hooks/pre-rebase.sample
+./.git/hooks/pre-receive.sample
+./.git/hooks/update.sample
+./.git/hooks/fsmonitor-watchman.sample
+./.git/hooks/pre-merge-commit.sample
+./.git/hooks/pre-commit.sample
+./.git/hooks/push-to-checkout.sample
+./.git/hooks/post-update.sample
+./.git/config
+./.git/description
+./.git/branches/
+./.git/refs/
+./.git/refs/heads/
+./.git/refs/heads/main
+./.git/refs/tags/
+./.git/refs/remotes/
+./.git/refs/remotes/origin/
+./.git/refs/remotes/origin/HEAD
+./static/
+./static/bootstrap.min.css
+./static/bootstrap.min.js
+./static/user_files/
+./static/user_files/house67_Cherry_Lane.jpg
+./static/user_files/house267_Cherry_Lane.jpg
+./static/popper.min.js
+./static/jquery-3.3.1.slim.min.js
+./requirements.txt
+Using default tag: latest
+latest: Pulling from library/python
+17c9e6141fdb: Pulling fs layer
+de4a4c6caea8: Pulling fs layer
+4edced8587e6: Pulling fs layer
+a7969cffbf46: Pulling fs layer
+74fbfde6af91: Pulling fs layer
+16fe51aed899: Pulling fs layer
+e9ee507bb0de: Pulling fs layer
+4d9dbb46d211: Pulling fs layer
+3b9b3c4e849c: Pulling fs layer
+a7969cffbf46: Waiting
+74fbfde6af91: Waiting
+16fe51aed899: Waiting
+e9ee507bb0de: Waiting
+4d9dbb46d211: Waiting
+3b9b3c4e849c: Waiting
+de4a4c6caea8: Verifying Checksum
+de4a4c6caea8: Download complete
+4edced8587e6: Verifying Checksum
+4edced8587e6: Download complete
+a7969cffbf46: Verifying Checksum
+a7969cffbf46: Download complete
+16fe51aed899: Verifying Checksum
+16fe51aed899: Download complete
+17c9e6141fdb: Verifying Checksum
+17c9e6141fdb: Download complete
+e9ee507bb0de: Verifying Checksum
+e9ee507bb0de: Download complete
+4d9dbb46d211: Verifying Checksum
+4d9dbb46d211: Download complete
+3b9b3c4e849c: Verifying Checksum
+3b9b3c4e849c: Download complete
+74fbfde6af91: Verifying Checksum
+74fbfde6af91: Download complete
+17c9e6141fdb: Pull complete
+de4a4c6caea8: Pull complete
+4edced8587e6: Pull complete
+a7969cffbf46: Pull complete
+74fbfde6af91: Pull complete
+16fe51aed899: Pull complete
+e9ee507bb0de: Pull complete
+4d9dbb46d211: Pull complete
+3b9b3c4e849c: Pull complete
+Digest: sha256:04c51d5db119aa131a58e1e13dbc343b8af875f76fe711229275b163fa80c636
+Status: Downloaded newer image for python:latest
+docker.io/library/python:latest
+Sending build context to Docker daemon  106.6MB
+
+Step 1/8 : FROM python:latest
+ ---> 00cd1fb8bdcc
+Step 2/8 : RUN apt update
+ ---> Running in dec19593e3e3
+[91m
+[0m[91mWARNING: [0m[91mapt[0m[91m [0m[91mdoes not have a stable CLI interface. [0m[91mUse with caution in scripts.[0m[91m
+[0m[91m
+[0mGet:1 http://deb.debian.org/debian bullseye InRelease [116 kB]
+Get:2 http://deb.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 Packages [8184 kB]
+Get:5 http://deb.debian.org/debian-security bullseye-security/main amd64 Packages [200 kB]
+Get:6 http://deb.debian.org/debian bullseye-updates/main amd64 Packages [14.6 kB]
+Fetched 8607 kB in 2s (4794 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Removing intermediate container dec19593e3e3
+ ---> 87d7056513bb
+Step 3/8 : WORKDIR /app
+ ---> Running in ff2d4d42f7f3
+Removing intermediate container ff2d4d42f7f3
+ ---> 4bf3d8b1a3fc
+Step 4/8 : ADD ./url_app.tar.gz .
+ ---> 4f95bdf773fb
+Step 5/8 : RUN pip install --upgrade pip
+ ---> Running in 1014bbf11608
+Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (22.3)
+Collecting pip
+  Downloading pip-22.3.1-py3-none-any.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 43.2 MB/s eta 0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 22.3
+    Uninstalling pip-22.3:
+      Successfully uninstalled pip-22.3
+Successfully installed pip-22.3.1
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRemoving intermediate container 1014bbf11608
+ ---> d68969388844
+Step 6/8 : RUN pip install -r requirements.txt
+ ---> Running in 3b8716848d4e
+Collecting attrs==22.1.0
+  Downloading attrs-22.1.0-py2.py3-none-any.whl (58 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.8/58.8 kB 7.8 MB/s eta 0:00:00
+Collecting click==8.1.3
+  Downloading click-8.1.3-py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.6/96.6 kB 15.2 MB/s eta 0:00:00
+Collecting flask==2.2.2
+  Downloading Flask-2.2.2-py3-none-any.whl (101 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.5/101.5 kB 14.9 MB/s eta 0:00:00
+Collecting iniconfig==1.1.1
+  Downloading iniconfig-1.1.1-py2.py3-none-any.whl (5.0 kB)
+Collecting itsdangerous==2.1.2
+  Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Collecting jinja2==3.1.2
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 kB 21.6 MB/s eta 0:00:00
+Collecting markupsafe==2.1.1
+  Downloading MarkupSafe-2.1.1.tar.gz (18 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting packaging==21.3
+  Downloading packaging-21.3-py3-none-any.whl (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.8/40.8 kB 6.8 MB/s eta 0:00:00
+Collecting pluggy==1.0.0
+  Downloading pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
+Collecting py==1.11.0
+  Downloading py-1.11.0-py2.py3-none-any.whl (98 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.7/98.7 kB 17.4 MB/s eta 0:00:00
+Collecting pyparsing==3.0.9
+  Downloading pyparsing-3.0.9-py3-none-any.whl (98 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.3/98.3 kB 16.6 MB/s eta 0:00:00
+Collecting pytest==7.1.2
+  Downloading pytest-7.1.2-py3-none-any.whl (297 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 297.0/297.0 kB 35.7 MB/s eta 0:00:00
+Collecting tomli==2.0.1
+  Downloading tomli-2.0.1-py3-none-any.whl (12 kB)
+Collecting werkzeug==2.2.2
+  Downloading Werkzeug-2.2.2-py3-none-any.whl (232 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 232.7/232.7 kB 30.1 MB/s eta 0:00:00
+Building wheels for collected packages: markupsafe
+  Building wheel for markupsafe (setup.py): started
+  Building wheel for markupsafe (setup.py): finished with status 'done'
+  Created wheel for markupsafe: filename=MarkupSafe-2.1.1-cp311-cp311-linux_x86_64.whl size=27482 sha256=f7e0bddcf619cf0ffa8c705761f63025bacc9eafbe14a60c7748293c21458155
+  Stored in directory: /root/.cache/pip/wheels/96/ee/62/407c247ad088bcb67b530ba3ac1479058c58a651bd6bf09a1f
+Successfully built markupsafe
+Installing collected packages: iniconfig, tomli, pyparsing, py, pluggy, markupsafe, itsdangerous, click, attrs, werkzeug, packaging, jinja2, pytest, flask
+Successfully installed attrs-22.1.0 click-8.1.3 flask-2.2.2 iniconfig-1.1.1 itsdangerous-2.1.2 jinja2-3.1.2 markupsafe-2.1.1 packaging-21.3 pluggy-1.0.0 py-1.11.0 pyparsing-3.0.9 pytest-7.1.2 tomli-2.0.1 werkzeug-2.2.2
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRemoving intermediate container 3b8716848d4e
+ ---> 98950cc1b68c
+Step 7/8 : EXPOSE 5000
+ ---> Running in c4363cc891b1
+Removing intermediate container c4363cc891b1
+ ---> 227a723236a9
+Step 8/8 : ENTRYPOINT FLASK_APP=application flask run --host=0.0.0.0
+ ---> Running in d28565bd7ddd
+Removing intermediate container d28565bd7ddd
+ ---> e2d165f71858
+Successfully built e2d165f71858
+Successfully tagged heripotter/deploy5:latest
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to Dockerhub)
+[Pipeline] node
+Running on dockerAgent in /home/ubuntu/agent/workspace/url_shortener_main
+[Pipeline] {
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential b16544b0-0929-4909-a0ed-8251aa2c38df
+Fetching changes from the remote Git repository
+Fetching without tags
+Checking out Revision 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab (main)
+ > git rev-parse --resolve-git-dir /home/ubuntu/agent/workspace/url_shortener_main/.git # timeout=10
+ > git config remote.origin.url https://github.com/herimendoza/kuralabs_deployment_5.git # timeout=10
+Fetching upstream changes from https://github.com/herimendoza/kuralabs_deployment_5.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+using GIT_ASKPASS to set credentials Github Token
+ > git fetch --no-tags --force --progress -- https://github.com/herimendoza/kuralabs_deployment_5.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab # timeout=10
+Commit message: "fixed test"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+The push refers to repository [docker.io/heripotter/deploy5]
+7a6a859d3ed4: Preparing
+f2448772c7a0: Preparing
+88d171d252bf: Preparing
+5465c32e8c75: Preparing
+39ec55c03efa: Preparing
+6f6e69c2c592: Preparing
+53b8bfee7a0a: Preparing
+5b3f1ed98915: Preparing
+6b183c62e3d7: Preparing
+882fd36bfd35: Preparing
+d1dec9917839: Preparing
+d38adf39e1dd: Preparing
+4ed121b04368: Preparing
+d9d07d703dd5: Preparing
+6f6e69c2c592: Waiting
+53b8bfee7a0a: Waiting
+5b3f1ed98915: Waiting
+6b183c62e3d7: Waiting
+882fd36bfd35: Waiting
+d1dec9917839: Waiting
+d38adf39e1dd: Waiting
+4ed121b04368: Waiting
+d9d07d703dd5: Waiting
+5465c32e8c75: Pushed
+6f6e69c2c592: Layer already exists
+53b8bfee7a0a: Layer already exists
+5b3f1ed98915: Layer already exists
+39ec55c03efa: Pushed
+6b183c62e3d7: Layer already exists
+882fd36bfd35: Layer already exists
+d1dec9917839: Layer already exists
+d38adf39e1dd: Layer already exists
+4ed121b04368: Layer already exists
+d9d07d703dd5: Layer already exists
+7a6a859d3ed4: Pushed
+f2448772c7a0: Pushed
+88d171d252bf: Pushed
+latest: digest: sha256:e7cabd7c28e18635ee2ace0576d27af30335c52b8b58d542fcdbc03be2411c19 size: 3270
+Untagged: heripotter/deploy5:latest
+Untagged: heripotter/deploy5@sha256:e7cabd7c28e18635ee2ace0576d27af30335c52b8b58d542fcdbc03be2411c19
+Deleted: sha256:e2d165f718581074d60ba3a5c113634b118f2803a63881629f28bac60476724a
+Deleted: sha256:227a723236a960296dd3d40ff33cce22b553146b7f539d2b265ff45d749c9562
+Deleted: sha256:98950cc1b68c200b991a355fc227be55f0323bf4ebabc635cfb395b9bff653e2
+Deleted: sha256:248211973ead4f70ca2c2a4c13ca9e50fe195fdead354613165507188d20ba1e
+Deleted: sha256:d689693888444a68288be30c84bbeb66a845d17dfedaedcc27fbc88f2aec3dd6
+Deleted: sha256:44407c8a055fad870a9e8f159f18feadce72e6c90603dd78dfdf721f267b31cb
+Deleted: sha256:4f95bdf773fb7322763bcc8c6eefdd192e558581d9567350254624f98ba3dafe
+Deleted: sha256:dcf32d2d9adf93702e13a521c29a40a5afa9b88d2bc0ca2f2e872d964374f54b
+Deleted: sha256:4bf3d8b1a3fc3cb47c54dc6119dbcbb945a03bde0535082f84b2991b5acc7e5b
+Deleted: sha256:509f6dd230708662de3721e199a3170c55f16ae0e95434de5999bef20b57548e
+Deleted: sha256:87d7056513bb78dfaf721a0575e4a6071f48dd7a735a5a971acf1b6d2860460d
+Deleted: sha256:a8498c504b7c5f98a043a3fed5e548eed464a83666dd4eb576ce53bb8658111f
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to ECS)
+[Pipeline] node
+Running on terraformAgent in /home/ubuntu/agent/workspace/url_shortener_main
+[Pipeline] {
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential b16544b0-0929-4909-a0ed-8251aa2c38df
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/herimendoza/kuralabs_deployment_5.git
+ > git init /home/ubuntu/agent/workspace/url_shortener_main # timeout=10
+Fetching upstream changes from https://github.com/herimendoza/kuralabs_deployment_5.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+using GIT_ASKPASS to set credentials Github Token
+ > git fetch --no-tags --force --progress -- https://github.com/herimendoza/kuralabs_deployment_5.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+ > git config remote.origin.url https://github.com/herimendoza/kuralabs_deployment_5.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/main:refs/remotes/origin/main # timeout=10
+Avoid second fetch
+Checking out Revision 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7c74a619cd5411d9b0d68af1a4bc79f87dd3d1ab # timeout=10
+Commit message: "fixed test"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $aws_access_key or $aws_secret_key
+[Pipeline] {
+[Pipeline] dir
+Running in /home/ubuntu/agent/workspace/url_shortener_main/intTerraform
+[Pipeline] {
+[Pipeline] sh
+
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding latest version of hashicorp/aws...
+- Installing hashicorp/aws v4.39.0...
+- Installed hashicorp/aws v4.39.0 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # aws_alb.url_app[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_alb" "url_app" {
+      [32m+[0m [0m[1m[0marn[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0marn_suffix[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mdesync_mitigation_mode[0m[0m     = "defensive"
+      [32m+[0m [0m[1m[0mdns_name[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mdrop_invalid_header_fields[0m[0m = false
+      [32m+[0m [0m[1m[0menable_deletion_protection[0m[0m = false
+      [32m+[0m [0m[1m[0menable_http2[0m[0m               = true
+      [32m+[0m [0m[1m[0menable_waf_fail_open[0m[0m       = false
+      [32m+[0m [0m[1m[0mid[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0midle_timeout[0m[0m               = 60
+      [32m+[0m [0m[1m[0minternal[0m[0m                   = false
+      [32m+[0m [0m[1m[0mip_address_type[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mload_balancer_type[0m[0m         = "application"
+      [32m+[0m [0m[1m[0mname[0m[0m                       = "url-lb"
+      [32m+[0m [0m[1m[0mpreserve_host_header[0m[0m       = false
+      [32m+[0m [0m[1m[0msecurity_groups[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0msubnets[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mzone_id[0m[0m                    = (known after apply)
+
+      [32m+[0m [0msubnet_mapping {
+          [32m+[0m [0m[1m[0mallocation_id[0m[0m        = (known after apply)
+          [32m+[0m [0m[1m[0mipv6_address[0m[0m         = (known after apply)
+          [32m+[0m [0m[1m[0moutpost_id[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ipv4_address[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0msubnet_id[0m[0m            = (known after apply)
+        }
+    }
+
+[1m  # aws_alb_listener.url_app_listener[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_alb_listener" "url_app_listener" {
+      [32m+[0m [0m[1m[0marn[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mload_balancer_arn[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mport[0m[0m              = 80
+      [32m+[0m [0m[1m[0mprotocol[0m[0m          = "HTTP"
+      [32m+[0m [0m[1m[0mssl_policy[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m          = (known after apply)
+
+      [32m+[0m [0mdefault_action {
+          [32m+[0m [0m[1m[0morder[0m[0m            = (known after apply)
+          [32m+[0m [0m[1m[0mtarget_group_arn[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mtype[0m[0m             = "forward"
+        }
+    }
+
+[1m  # aws_cloudwatch_log_group.log-group[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_group" "log-group" {
+      [32m+[0m [0m[1m[0marn[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m              = "/ecs/url-logs"
+      [32m+[0m [0m[1m[0mretention_in_days[0m[0m = 0
+      [32m+[0m [0m[1m[0mtags[0m[0m              = {
+          [32m+[0m [0m"Application" = "url-app"
+        }
+      [32m+[0m [0m[1m[0mtags_all[0m[0m          = {
+          [32m+[0m [0m"Application" = "url-app"
+        }
+    }
+
+[1m  # aws_ecs_cluster.aws-ecs-cluster[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_ecs_cluster" "aws-ecs-cluster" {
+      [32m+[0m [0m[1m[0marn[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mcapacity_providers[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m               = "urlapp-cluster"
+      [32m+[0m [0m[1m[0mtags[0m[0m               = {
+          [32m+[0m [0m"Name" = "url-ecs"
+        }
+      [32m+[0m [0m[1m[0mtags_all[0m[0m           = {
+          [32m+[0m [0m"Name" = "url-ecs"
+        }
+
+      [32m+[0m [0mdefault_capacity_provider_strategy {
+          [32m+[0m [0m[1m[0mbase[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mcapacity_provider[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mweight[0m[0m            = (known after apply)
+        }
+
+      [32m+[0m [0msetting {
+          [32m+[0m [0m[1m[0mname[0m[0m  = (known after apply)
+          [32m+[0m [0m[1m[0mvalue[0m[0m = (known after apply)
+        }
+    }
+
+[1m  # aws_ecs_service.aws-ecs-service[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_ecs_service" "aws-ecs-service" {
+      [32m+[0m [0m[1m[0mcluster[0m[0m                            = (known after apply)
+      [32m+[0m [0m[1m[0mdeployment_maximum_percent[0m[0m         = 200
+      [32m+[0m [0m[1m[0mdeployment_minimum_healthy_percent[0m[0m = 100
+      [32m+[0m [0m[1m[0mdesired_count[0m[0m                      = 1
+      [32m+[0m [0m[1m[0menable_ecs_managed_tags[0m[0m            = false
+      [32m+[0m [0m[1m[0menable_execute_command[0m[0m             = false
+      [32m+[0m [0m[1m[0mforce_new_deployment[0m[0m               = true
+      [32m+[0m [0m[1m[0miam_role[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                                 = (known after apply)
+      [32m+[0m [0m[1m[0mlaunch_type[0m[0m                        = "FARGATE"
+      [32m+[0m [0m[1m[0mname[0m[0m                               = "url-ecs-service"
+      [32m+[0m [0m[1m[0mplatform_version[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mscheduling_strategy[0m[0m                = "REPLICA"
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mtask_definition[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mwait_for_steady_state[0m[0m              = false
+
+      [32m+[0m [0mload_balancer {
+          [32m+[0m [0m[1m[0mcontainer_name[0m[0m   = "url-container"
+          [32m+[0m [0m[1m[0mcontainer_port[0m[0m   = 5000
+          [32m+[0m [0m[1m[0mtarget_group_arn[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mnetwork_configuration {
+          [32m+[0m [0m[1m[0massign_public_ip[0m[0m = false
+          [32m+[0m [0m[1m[0msecurity_groups[0m[0m  = (known after apply)
+          [32m+[0m [0m[1m[0msubnets[0m[0m          = (known after apply)
+        }
+    }
+
+[1m  # aws_ecs_task_definition.aws-ecs-task[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_ecs_task_definition" "aws-ecs-task" {
+      [32m+[0m [0m[1m[0marn[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mcontainer_definitions[0m[0m    = jsonencode(
+            [
+              [32m+[0m [0m{
+                  [32m+[0m [0mimage            = "heripotter/deploy5:latest"
+                  [32m+[0m [0mlogConfiguration = {
+                      [32m+[0m [0mlogDriver = "awslogs"
+                      [32m+[0m [0moptions   = {
+                          [32m+[0m [0mawslogs-group         = "/ecs/url-logs"
+                          [32m+[0m [0mawslogs-region        = "us-east-1"
+                          [32m+[0m [0mawslogs-stream-prefix = "ecs"
+                        }
+                    }
+                  [32m+[0m [0mname             = "url-container"
+                  [32m+[0m [0mportMappings     = [
+                      [32m+[0m [0m{
+                          [32m+[0m [0mcontainerPort = 5000
+                        },
+                    ]
+                },
+            ]
+        )
+      [32m+[0m [0m[1m[0mcpu[0m[0m                      = "512"
+      [32m+[0m [0m[1m[0mexecution_role_arn[0m[0m       = "arn:aws:iam::753698151326:role/ecsTaskEX"
+      [32m+[0m [0m[1m[0mfamily[0m[0m                   = "url-task"
+      [32m+[0m [0m[1m[0mid[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mmemory[0m[0m                   = "1024"
+      [32m+[0m [0m[1m[0mnetwork_mode[0m[0m             = "awsvpc"
+      [32m+[0m [0m[1m[0mrequires_compatibilities[0m[0m = [
+          [32m+[0m [0m"FARGATE",
+        ]
+      [32m+[0m [0m[1m[0mrevision[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mskip_destroy[0m[0m             = false
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mtask_role_arn[0m[0m            = "arn:aws:iam::753698151326:role/ecsTaskEX"
+    }
+
+[1m  # aws_eip.elastic-ip[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_eip" "elastic-ip" {
+      [32m+[0m [0m[1m[0mallocation_id[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0massociation_id[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mcarrier_ip[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mcustomer_owned_ip[0m[0m    = (known after apply)
+      [32m+[0m [0m[1m[0mdomain[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0minstance[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mnetwork_border_group[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mnetwork_interface[0m[0m    = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_dns[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_ip[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mpublic_dns[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mpublic_ip[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mpublic_ipv4_pool[0m[0m     = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mvpc[0m[0m                  = true
+    }
+
+[1m  # aws_internet_gateway.igw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_internet_gateway" "igw" {
+      [32m+[0m [0m[1m[0marn[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mowner_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m   = (known after apply)
+    }
+
+[1m  # aws_lb_target_group.url-app[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_lb_target_group" "url-app" {
+      [32m+[0m [0m[1m[0marn[0m[0m                                = (known after apply)
+      [32m+[0m [0m[1m[0marn_suffix[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mconnection_termination[0m[0m             = false
+      [32m+[0m [0m[1m[0mderegistration_delay[0m[0m               = "300"
+      [32m+[0m [0m[1m[0mid[0m[0m                                 = (known after apply)
+      [32m+[0m [0m[1m[0mip_address_type[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mlambda_multi_value_headers_enabled[0m[0m = false
+      [32m+[0m [0m[1m[0mload_balancing_algorithm_type[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                               = "url-app"
+      [32m+[0m [0m[1m[0mport[0m[0m                               = 5000
+      [32m+[0m [0m[1m[0mpreserve_client_ip[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                           = "HTTP"
+      [32m+[0m [0m[1m[0mprotocol_version[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mproxy_protocol_v2[0m[0m                  = false
+      [32m+[0m [0m[1m[0mslow_start[0m[0m                         = 0
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_type[0m[0m                        = "ip"
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                             = (known after apply)
+
+      [32m+[0m [0mhealth_check {
+          [32m+[0m [0m[1m[0menabled[0m[0m             = true
+          [32m+[0m [0m[1m[0mhealthy_threshold[0m[0m   = 3
+          [32m+[0m [0m[1m[0minterval[0m[0m            = 30
+          [32m+[0m [0m[1m[0mmatcher[0m[0m             = (known after apply)
+          [32m+[0m [0m[1m[0mpath[0m[0m                = "/health"
+          [32m+[0m [0m[1m[0mport[0m[0m                = "traffic-port"
+          [32m+[0m [0m[1m[0mprotocol[0m[0m            = "HTTP"
+          [32m+[0m [0m[1m[0mtimeout[0m[0m             = (known after apply)
+          [32m+[0m [0m[1m[0munhealthy_threshold[0m[0m = 3
+        }
+
+      [32m+[0m [0mstickiness {
+          [32m+[0m [0m[1m[0mcookie_duration[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mcookie_name[0m[0m     = (known after apply)
+          [32m+[0m [0m[1m[0menabled[0m[0m         = (known after apply)
+          [32m+[0m [0m[1m[0mtype[0m[0m            = (known after apply)
+        }
+
+      [32m+[0m [0mtarget_failover {
+          [32m+[0m [0m[1m[0mon_deregistration[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mon_unhealthy[0m[0m      = (known after apply)
+        }
+    }
+
+[1m  # aws_nat_gateway.ngw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "ngw" {
+      [32m+[0m [0m[1m[0mallocation_id[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mconnectivity_type[0m[0m    = "public"
+      [32m+[0m [0m[1m[0mid[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mnetwork_interface_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_ip[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mpublic_ip[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m             = (known after apply)
+    }
+
+[1m  # aws_route.private_ngw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route" "private_ngw" {
+      [32m+[0m [0m[1m[0mdestination_cidr_block[0m[0m = "0.0.0.0/0"
+      [32m+[0m [0m[1m[0mid[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0minstance_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0minstance_owner_id[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mnat_gateway_id[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mnetwork_interface_id[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0morigin[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m                  = (known after apply)
+    }
+
+[1m  # aws_route.public_igw[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route" "public_igw" {
+      [32m+[0m [0m[1m[0mdestination_cidr_block[0m[0m = "0.0.0.0/0"
+      [32m+[0m [0m[1m[0mgateway_id[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0minstance_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0minstance_owner_id[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mnetwork_interface_id[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0morigin[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m                  = (known after apply)
+    }
+
+[1m  # aws_route_table.private[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route_table" "private" {
+      [32m+[0m [0m[1m[0marn[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mowner_id[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mpropagating_vgws[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mroute[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m           = (known after apply)
+    }
+
+[1m  # aws_route_table.public[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route_table" "public" {
+      [32m+[0m [0m[1m[0marn[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mowner_id[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mpropagating_vgws[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mroute[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m           = (known after apply)
+    }
+
+[1m  # aws_route_table_association.private_a_subnet[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route_table_association" "private_a_subnet" {
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.private_b_subnet[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route_table_association" "private_b_subnet" {
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.public_a_subnet[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public_a_subnet" {
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.public_b_subnet[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public_b_subnet" {
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m      = (known after apply)
+    }
+
+[1m  # aws_security_group.http[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_security_group" "http" {
+      [32m+[0m [0m[1m[0marn[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mdescription[0m[0m            = "HTTP traffic"
+      [32m+[0m [0m[1m[0megress[0m[0m                 = [
+          [32m+[0m [0m{
+              [32m+[0m [0mcidr_blocks      = [
+                  [32m+[0m [0m"0.0.0.0/0",
+                ]
+              [32m+[0m [0mdescription      = ""
+              [32m+[0m [0mfrom_port        = 0
+              [32m+[0m [0mipv6_cidr_blocks = []
+              [32m+[0m [0mprefix_list_ids  = []
+              [32m+[0m [0mprotocol         = "-1"
+              [32m+[0m [0msecurity_groups  = []
+              [32m+[0m [0mself             = false
+              [32m+[0m [0mto_port          = 0
+            },
+        ]
+      [32m+[0m [0m[1m[0mid[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mingress[0m[0m                = [
+          [32m+[0m [0m{
+              [32m+[0m [0mcidr_blocks      = [
+                  [32m+[0m [0m"0.0.0.0/0",
+                ]
+              [32m+[0m [0mdescription      = ""
+              [32m+[0m [0mfrom_port        = 80
+              [32m+[0m [0mipv6_cidr_blocks = []
+              [32m+[0m [0mprefix_list_ids  = []
+              [32m+[0m [0mprotocol         = "tcp"
+              [32m+[0m [0msecurity_groups  = []
+              [32m+[0m [0mself             = false
+              [32m+[0m [0mto_port          = 80
+            },
+        ]
+      [32m+[0m [0m[1m[0mname[0m[0m                   = "httptre"
+      [32m+[0m [0m[1m[0mname_prefix[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mowner_id[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mrevoke_rules_on_delete[0m[0m = false
+      [32m+[0m [0m[1m[0mtags_all[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                 = (known after apply)
+    }
+
+[1m  # aws_security_group.ingress_app[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_security_group" "ingress_app" {
+      [32m+[0m [0m[1m[0marn[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mdescription[0m[0m            = "Allow ingress to API"
+      [32m+[0m [0m[1m[0megress[0m[0m                 = [
+          [32m+[0m [0m{
+              [32m+[0m [0mcidr_blocks      = [
+                  [32m+[0m [0m"0.0.0.0/0",
+                ]
+              [32m+[0m [0mdescription      = ""
+              [32m+[0m [0mfrom_port        = 0
+              [32m+[0m [0mipv6_cidr_blocks = []
+              [32m+[0m [0mprefix_list_ids  = []
+              [32m+[0m [0mprotocol         = "-1"
+              [32m+[0m [0msecurity_groups  = []
+              [32m+[0m [0mself             = false
+              [32m+[0m [0mto_port          = 0
+            },
+        ]
+      [32m+[0m [0m[1m[0mid[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mingress[0m[0m                = [
+          [32m+[0m [0m{
+              [32m+[0m [0mcidr_blocks      = [
+                  [32m+[0m [0m"0.0.0.0/0",
+                ]
+              [32m+[0m [0mdescription      = ""
+              [32m+[0m [0mfrom_port        = 5000
+              [32m+[0m [0mipv6_cidr_blocks = []
+              [32m+[0m [0mprefix_list_ids  = []
+              [32m+[0m [0mprotocol         = "tcp"
+              [32m+[0m [0msecurity_groups  = []
+              [32m+[0m [0mself             = false
+              [32m+[0m [0mto_port          = 5000
+            },
+        ]
+      [32m+[0m [0m[1m[0mname[0m[0m                   = "ingress-api"
+      [32m+[0m [0m[1m[0mname_prefix[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mowner_id[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mrevoke_rules_on_delete[0m[0m = false
+      [32m+[0m [0m[1m[0mtags_all[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                 = (known after apply)
+    }
+
+[1m  # aws_subnet.private_a[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_subnet" "private_a" {
+      [32m+[0m [0m[1m[0marn[0m[0m                                            = (known after apply)
+      [32m+[0m [0m[1m[0massign_ipv6_address_on_creation[0m[0m                = false
+      [32m+[0m [0m[1m[0mavailability_zone[0m[0m                              = "us-east-1a"
+      [32m+[0m [0m[1m[0mavailability_zone_id[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                                     = "172.28.64.0/18"
+      [32m+[0m [0m[1m[0menable_dns64[0m[0m                                   = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_a_record_on_launch[0m[0m    = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_aaaa_record_on_launch[0m[0m = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_cidr_block_association_id[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_native[0m[0m                                    = false
+      [32m+[0m [0m[1m[0mmap_public_ip_on_launch[0m[0m                        = false
+      [32m+[0m [0m[1m[0mowner_id[0m[0m                                       = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_dns_hostname_type_on_launch[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags[0m[0m                                           = {
+          [32m+[0m [0m"Name" = "private | us-east-1a"
+        }
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                                       = {
+          [32m+[0m [0m"Name" = "private | us-east-1a"
+        }
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.private_b[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_subnet" "private_b" {
+      [32m+[0m [0m[1m[0marn[0m[0m                                            = (known after apply)
+      [32m+[0m [0m[1m[0massign_ipv6_address_on_creation[0m[0m                = false
+      [32m+[0m [0m[1m[0mavailability_zone[0m[0m                              = "us-east-1b"
+      [32m+[0m [0m[1m[0mavailability_zone_id[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                                     = "172.28.192.0/18"
+      [32m+[0m [0m[1m[0menable_dns64[0m[0m                                   = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_a_record_on_launch[0m[0m    = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_aaaa_record_on_launch[0m[0m = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_cidr_block_association_id[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_native[0m[0m                                    = false
+      [32m+[0m [0m[1m[0mmap_public_ip_on_launch[0m[0m                        = false
+      [32m+[0m [0m[1m[0mowner_id[0m[0m                                       = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_dns_hostname_type_on_launch[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags[0m[0m                                           = {
+          [32m+[0m [0m"Name" = "private | us-east-1b"
+        }
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                                       = {
+          [32m+[0m [0m"Name" = "private | us-east-1b"
+        }
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.public_a[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_subnet" "public_a" {
+      [32m+[0m [0m[1m[0marn[0m[0m                                            = (known after apply)
+      [32m+[0m [0m[1m[0massign_ipv6_address_on_creation[0m[0m                = false
+      [32m+[0m [0m[1m[0mavailability_zone[0m[0m                              = "us-east-1a"
+      [32m+[0m [0m[1m[0mavailability_zone_id[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                                     = "172.28.0.0/18"
+      [32m+[0m [0m[1m[0menable_dns64[0m[0m                                   = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_a_record_on_launch[0m[0m    = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_aaaa_record_on_launch[0m[0m = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_cidr_block_association_id[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_native[0m[0m                                    = false
+      [32m+[0m [0m[1m[0mmap_public_ip_on_launch[0m[0m                        = false
+      [32m+[0m [0m[1m[0mowner_id[0m[0m                                       = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_dns_hostname_type_on_launch[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags[0m[0m                                           = {
+          [32m+[0m [0m"Name" = "public | us-east-1a"
+        }
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                                       = {
+          [32m+[0m [0m"Name" = "public | us-east-1a"
+        }
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.public_b[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_subnet" "public_b" {
+      [32m+[0m [0m[1m[0marn[0m[0m                                            = (known after apply)
+      [32m+[0m [0m[1m[0massign_ipv6_address_on_creation[0m[0m                = false
+      [32m+[0m [0m[1m[0mavailability_zone[0m[0m                              = "us-east-1b"
+      [32m+[0m [0m[1m[0mavailability_zone_id[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                                     = "172.28.128.0/18"
+      [32m+[0m [0m[1m[0menable_dns64[0m[0m                                   = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_a_record_on_launch[0m[0m    = false
+      [32m+[0m [0m[1m[0menable_resource_name_dns_aaaa_record_on_launch[0m[0m = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_cidr_block_association_id[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_native[0m[0m                                    = false
+      [32m+[0m [0m[1m[0mmap_public_ip_on_launch[0m[0m                        = false
+      [32m+[0m [0m[1m[0mowner_id[0m[0m                                       = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_dns_hostname_type_on_launch[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mtags[0m[0m                                           = {
+          [32m+[0m [0m"Name" = "public | us-east-1b"
+        }
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                                       = {
+          [32m+[0m [0m"Name" = "public | us-east-1b"
+        }
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                                         = (known after apply)
+    }
+
+[1m  # aws_vpc.app_vpc[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_vpc" "app_vpc" {
+      [32m+[0m [0m[1m[0marn[0m[0m                                  = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                           = "172.28.0.0/16"
+      [32m+[0m [0m[1m[0mdefault_network_acl_id[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mdefault_route_table_id[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mdefault_security_group_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mdhcp_options_id[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0menable_classiclink[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0menable_classiclink_dns_support[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0menable_dns_hostnames[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0menable_dns_support[0m[0m                   = true
+      [32m+[0m [0m[1m[0menable_network_address_usage_metrics[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                                   = (known after apply)
+      [32m+[0m [0m[1m[0minstance_tenancy[0m[0m                     = "default"
+      [32m+[0m [0m[1m[0mipv6_association_id[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_cidr_block[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mipv6_cidr_block_network_border_group[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mmain_route_table_id[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mowner_id[0m[0m                             = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                             = (known after apply)
+    }
+
+[0m[1mPlan:[0m 25 to add, 0 to change, 0 to destroy.
+[0m[0m
+[1mChanges to Outputs:[0m[0m
+  [32m+[0m [0m[1m[0malb_url[0m[0m = (known after apply)
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Saved the plan to: plan.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "plan.tfplan"
+[0m[1maws_cloudwatch_log_group.log-group: Creating...[0m[0m
+[0m[1maws_vpc.app_vpc: Creating...[0m[0m
+[0m[1maws_eip.elastic-ip: Creating...[0m[0m
+[0m[1maws_ecs_cluster.aws-ecs-cluster: Creating...[0m[0m
+[0m[1maws_ecs_task_definition.aws-ecs-task: Creating...[0m[0m
+[0m[1maws_cloudwatch_log_group.log-group: Creation complete after 0s [id=/ecs/url-logs][0m
+[0m[1maws_ecs_task_definition.aws-ecs-task: Creation complete after 0s [id=url-task][0m
+[0m[1maws_eip.elastic-ip: Creation complete after 1s [id=eipalloc-0913c7ce927576953][0m
+[0m[1maws_vpc.app_vpc: Creation complete after 1s [id=vpc-0ef8511305f146273][0m
+[0m[1maws_security_group.ingress_app: Creating...[0m[0m
+[0m[1maws_internet_gateway.igw: Creating...[0m[0m
+[0m[1maws_security_group.http: Creating...[0m[0m
+[0m[1maws_subnet.public_a: Creating...[0m[0m
+[0m[1maws_route_table.public: Creating...[0m[0m
+[0m[1maws_route_table.private: Creating...[0m[0m
+[0m[1maws_subnet.public_b: Creating...[0m[0m
+[0m[1maws_subnet.private_b: Creating...[0m[0m
+[0m[1maws_subnet.private_a: Creating...[0m[0m
+[0m[1maws_route_table.private: Creation complete after 1s [id=rtb-0bfd8faba305033e0][0m
+[0m[1maws_internet_gateway.igw: Creation complete after 1s [id=igw-0ccea2a1ad50d73bc][0m
+[0m[1maws_route_table.public: Creation complete after 1s [id=rtb-05af1bd23c06437e6][0m
+[0m[1maws_route.public_igw: Creating...[0m[0m
+[0m[1maws_subnet.public_b: Creation complete after 1s [id=subnet-0650dfc4ec72a8386][0m
+[0m[1maws_subnet.public_a: Creation complete after 1s [id=subnet-0cd809604bbb41990][0m
+[0m[1maws_route_table_association.public_b_subnet: Creating...[0m[0m
+[0m[1maws_nat_gateway.ngw: Creating...[0m[0m
+[0m[1maws_route_table_association.public_a_subnet: Creating...[0m[0m
+[0m[1maws_route.public_igw: Creation complete after 0s [id=r-rtb-05af1bd23c06437e61080289494][0m
+[0m[1maws_subnet.private_b: Creation complete after 1s [id=subnet-0c79deaeecc06a151][0m
+[0m[1maws_route_table_association.private_b_subnet: Creating...[0m[0m
+[0m[1maws_route_table_association.public_b_subnet: Creation complete after 0s [id=rtbassoc-01a3642817ebb0601][0m
+[0m[1maws_route_table_association.public_a_subnet: Creation complete after 0s [id=rtbassoc-096b6431dac2bab54][0m
+[0m[1maws_route_table_association.private_b_subnet: Creation complete after 0s [id=rtbassoc-0c0e4e37596890149][0m
+[0m[1maws_subnet.private_a: Creation complete after 2s [id=subnet-046586714d6ba6e72][0m
+[0m[1maws_route_table_association.private_a_subnet: Creating...[0m[0m
+[0m[1maws_route_table_association.private_a_subnet: Creation complete after 0s [id=rtbassoc-05708f64915c5512d][0m
+[0m[1maws_security_group.http: Creation complete after 3s [id=sg-0f9e7a4d02e277cee][0m
+[0m[1maws_alb.url_app: Creating...[0m[0m
+[0m[1maws_security_group.ingress_app: Creation complete after 3s [id=sg-098cbcc90557c6c11][0m
+[0m[1maws_ecs_cluster.aws-ecs-cluster: Still creating... [10s elapsed][0m[0m
+[0m[1maws_ecs_cluster.aws-ecs-cluster: Creation complete after 11s [id=arn:aws:ecs:us-east-1:753698151326:cluster/urlapp-cluster][0m
+[0m[1maws_nat_gateway.ngw: Still creating... [10s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [10s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [20s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [20s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [30s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [30s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [40s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [40s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [50s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [50s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [1m0s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [1m0s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [1m10s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [1m10s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [1m20s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [1m20s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Still creating... [1m30s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [1m30s elapsed][0m[0m
+[0m[1maws_nat_gateway.ngw: Creation complete after 1m34s [id=nat-0c421bfa723a3cc03][0m
+[0m[1maws_route.private_ngw: Creating...[0m[0m
+[0m[1maws_route.private_ngw: Creation complete after 1s [id=r-rtb-0bfd8faba305033e01080289494][0m
+[0m[1maws_alb.url_app: Still creating... [1m40s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [1m50s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [2m0s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [2m10s elapsed][0m[0m
+[0m[1maws_alb.url_app: Still creating... [2m20s elapsed][0m[0m
+[0m[1maws_alb.url_app: Creation complete after 2m22s [id=arn:aws:elasticloadbalancing:us-east-1:753698151326:loadbalancer/app/url-lb/88358d8d5a7e066a][0m
+[0m[1maws_lb_target_group.url-app: Creating...[0m[0m
+[0m[1maws_lb_target_group.url-app: Creation complete after 0s [id=arn:aws:elasticloadbalancing:us-east-1:753698151326:targetgroup/url-app/2d54464069c10131][0m
+[0m[1maws_ecs_service.aws-ecs-service: Creating...[0m[0m
+[0m[1maws_alb_listener.url_app_listener: Creating...[0m[0m
+[0m[1maws_alb_listener.url_app_listener: Creation complete after 0s [id=arn:aws:elasticloadbalancing:us-east-1:753698151326:listener/app/url-lb/88358d8d5a7e066a/dfc732d566e23461][0m
+[0m[1maws_ecs_service.aws-ecs-service: Creation complete after 1s [id=arn:aws:ecs:us-east-1:753698151326:service/urlapp-cluster/url-ecs-service][0m
+[0m[1m[32m
+Apply complete! Resources: 25 added, 0 changed, 0 destroyed.
+[0m[0m[1m[32m
+Outputs:
+
+[0malb_url = "http://url-lb-1421154020.us-east-1.elb.amazonaws.com"
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] emailext
+Sending mail from default account using System Admin e-mail address
+messageContentType = text/plain; charset=UTF-8
+Request made to attach build log
+Adding recipients from project recipient list
+Analyzing: heri.mendoza9@gmail.com
+Looking for: heri.mendoza9@gmail.com
+	starting at: 0
+	firstFoundIdx: 0
+	firstFoundIdx-substring: heri.mendoza9@gmail.com
+	=> found type: 0
+Analyzing: heri.mendoza9@gmail.com
+Looking for: heri.mendoza9@gmail.com
+	starting at: 0
+	firstFoundIdx: 0
+	firstFoundIdx-substring: heri.mendoza9@gmail.com
+	=> found type: 0
+Analyzing: heri.mendoza9@gmail.com
+Looking for: heri.mendoza9@gmail.com
+	starting at: 0
+	firstFoundIdx: 0
+	firstFoundIdx-substring: heri.mendoza9@gmail.com
+	=> found type: 0
+Adding recipients from trigger recipient list
+Setting In-Reply-To since last build was not successful
+Successfully created MimeMessage
+Sending email to: heri.mendoza9@gmail.com
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: need username and password for authentication
+DEBUG SMTP: protocolConnect returning false, host=smtp.gmail.com, user=jenkins, password=<null>
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL false
+220 smtp.gmail.com ESMTP he31-20020a05622a601f00b00397b1c60780sm7850604qtb.61 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO ip-172-31-83-232.ec2.internal
+250-smtp.gmail.com at your service, [54.175.176.6]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=heri.mendoza9@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<nobody@nowhere>
+250 2.1.0 OK he31-20020a05622a601f00b00397b1c60780sm7850604qtb.61 - gsmtp
+DEBUG SMTP: sendPartial set
+RCPT TO:<heri.mendoza9@gmail.com>
+250 2.1.5 OK he31-20020a05622a601f00b00397b1c60780sm7850604qtb.61 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   heri.mendoza9@gmail.com
+DATA
+354  Go ahead he31-20020a05622a601f00b00397b1c60780sm7850604qtb.61 - gsmtp
