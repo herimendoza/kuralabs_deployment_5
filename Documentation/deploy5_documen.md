@@ -222,3 +222,5 @@ Another issue that kept popping up is that every now and then, the URL for the a
 1. In the interest of readability the script to generate the containerized app could have been written in another file and then called in the jenkinsfile.
 
 2. In the default configurations, two agents were used in addition to the manager. Instead of two agents running Docker and Terraform, one more powerful instance could be used to run both Docker and Terraform.
+
+3. To mimic the resiliency and redundancy in the deployment infrastructure, two EC2s (with a greater amount of resources) could be placed in separate subnets in different availability zones, both running Docker and Terraform. This way, if one agent goes down, all the stages can still occur in the pipeline.
