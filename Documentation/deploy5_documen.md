@@ -210,11 +210,15 @@ The deployment infrastructure was created using the Terraform files in the repos
 
 3. A task definiton resource was created. This specified the image to be pulled from dockerhub (the one that was created in the pipeline), the container port (5000), resulting in a container. The container was deployed in ECS in a Fargate type setup (no EC2s, just containers). The ECS resource in Terraform specified the subnets that the container would be deployed to (private subnets), the port that would be opened (5000) and the load balancer that would direct traffic to the cluster. In summary, the ALB would direct traffic to the ECS cluser that would host Fargate containers of the application in the private subnets.
 
+[Infrastructure](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/deploy5_architecture.png)
+
 #### ***4. Issues***
 
 One issue that was observed during testing of the individual stages was the need for docker credentials in order to push to a docker repository. My solution was to SSH into the agent and manually enter the credentials. An alternative and more elegant solution would have been to use the docker plugin in Jenkins and add the credentials in the Jenkins GUI.
 
 Another issue that kept popping up is that every now and then, the URL for the application load balancer would return a 503 Error, even though the deployment and infrastructure was supposed to be up. A couple of refreshes later and the applicatin would be back. It was unclear why this happened.
+
+[503 Error](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/503_error.png)
 
 
 #### ***5. Improvements***
@@ -224,3 +228,17 @@ Another issue that kept popping up is that every now and then, the URL for the a
 2. In the default configurations, two agents were used in addition to the manager. Instead of two agents running Docker and Terraform, one more powerful instance could be used to run both Docker and Terraform.
 
 3. To mimic the resiliency and redundancy in the deployment infrastructure, two EC2s (with a greater amount of resources) could be placed in separate subnets in different availability zones, both running Docker and Terraform. This way, if one agent goes down, all the stages can still occur in the pipeline.
+
+#### ***6. Images***
+
+[Pipeline](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/deploy_5_pipeline.png)
+
+[App Home Page](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/app_homepage.png)
+
+[Testing a Code Change + Re-deploying](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/change_To_code.png)
+
+[Build Log](https://github.com/herimendoza/kuralabs_deployment_5/blob/4a09005910593d1b10a5d32d189e306d70f25068/Documentation/images/build_deploy5.log)
+
+[Successful Deployment Stages](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/deploy_success.png)
+
+[Successful Destroy Stage](https://raw.githubusercontent.com/herimendoza/kuralabs_deployment_5/main/Documentation/images/destroy_deploy.png)
