@@ -8,7 +8,7 @@
 
 ### **Objective:**
 
-The goal of this deployment is to continue gaining familiarity with the CI/CD pipeline, Terraform and Docker. A simple web application will be deployed across an AWS VPC created with Terraform using Jenkins and AWS Elastic Container Service.
+The goal of this deployment is to continue gaining familiarity with the CI/CD pipeline, Terraform and Docker. A simple web application will be containerized and deployed across an AWS VPC created with Terraform using Jenkins, Docker and AWS Elastic Container Service.
 
 ---
 
