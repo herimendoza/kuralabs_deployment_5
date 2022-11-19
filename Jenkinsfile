@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage ('Buiild') {
+        stage ('Build') {
             steps {
                 sh '''#!/bin/bash
                 python3 -m venv test3
@@ -26,7 +26,7 @@ pipeline {
                 }
             }
         }
-        stage ('Create Container') {
+        stage ('Create Image') {
             agent{label 'dockerAgent'}
             steps {
                 sh '''#!/bin/bash
