@@ -142,7 +142,7 @@ stage ('Push to Dockerhub') {
 }
 ```
 
-The agent label 'dockerAgent' ensures that this stage of the pipeline also takes place in the docker agent EC2. A short script is ran to push the container to a repository in dockerhub and delete the local image (to ensure that if the pipeline deployed again, the correct image is pushed). This stage is possible because (as mentioned before), the command `$docker login` was used to input credentials during the set up phase.
+The agent label 'dockerAgent' ensures that this stage of the pipeline also takes place in the Docker agent EC2. A short script is ran to push the container to a repository in dockerhub and delete the local image (to ensure that if the pipeline deployed again, the correct image is pushed). This stage is possible because (as mentioned before), the command `$docker login` was used to input credentials during the set up phase.
 
 #### 2e. The 'Deploy to ECS' stage:
 
@@ -164,3 +164,52 @@ stage ('Deploy to ECS') {
 }
 ```
 
+The agent label 'terraformAgent' specifies that this stage is to take place in the Terraform EC2. The credentials that were supplied in the Jenkins GUI are passed as variables into Terraform (giving Terraform access to AWS) to create, plan and apply the infrastructure. The infrastructure will be discussed later in the documentation.
+
+#### 2f. The 'Destroy Infrastructure' stage:
+
+```console
+stage ('Destroy Infrastructure') {
+    agent{label 'terraformAgent'}
+    steps {
+        withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
+            dir('intTerraform') {
+                sh '''#!/bin/bash
+                terraform destroy -auto-approve -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"
+                '''
+            }
+        }
+    }
+}
+```
+
+The agent label 'terraformAgent' specifies that this stage is to take place in the Terraform EC2. Using the same AWS credentials, the infrastructure is destroyed with `$terraform destroy`. This block of code was commented out as needed.
+
+#### 2g. The 'Post' stage:
+
+```console
+post{
+    always{
+        emailext to: "heri.mendoza9@gmail.com",
+        subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
+        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+        attachLog: true
+    }
+}
+```
+
+The 'Post' stage at the end simply send an email notification using the credentials provided, with he build log attached.
+
+#### ***3. The Terraform Infrastructure***
+
+The deployment infrastructure was created using the Terraform files in the repository. Below is a diagram of the entire infrastructure. Some notable points:
+
+1. A VPC was created with two public subnets, two private subnets, corresponding route tables, a NAT gateway an internet gateway, and two securtiy groups (one that opens port 80 and another that opens port 5000). The pairs of private and public subnets were specified to be in different availability zones.
+
+2. An application load balancer was created in three parts: an ALB, a listening group, and a target group. The ALB was internet-facing, attached to the two public subnets. The HTTP security group was also attached with it, allowing for HTTP traffic (port 80). The listenting group associated with the ALB listens on port 80 and forwards requests to the target group. The target group has port 5000 open (Flask default port).
+
+3. A task definiton resource was created. This specified the image to be pulled from dockerhub (the one that was created in the pipeline), the container port (5000), resulting in a container. The container was deployed in ECS in a Fargate type setup (no EC2s, just containers). The ECS resource in Terraform specified the subnets that the container would be deployed to (private subnets), the port that would be opened (5000) and the load balancer that would direct traffic to the cluster. In summary, the ALB would direct traffic to the ECS cluser that would host Fargate containers of the application in the private subnets.
+
+#### ***4. Issues***
+
+One issue that was
