@@ -212,4 +212,13 @@ The deployment infrastructure was created using the Terraform files in the repos
 
 #### ***4. Issues***
 
-One issue that was
+One issue that was observed during testing of the individual stages was the need for docker credentials in order to push to a docker repository. My solution was to SSH into the agent and manually enter the credentials. An alternative and more elegant solution would have been to use the docker plugin in Jenkins and add the credentials in the Jenkins GUI.
+
+Another issue that kept popping up is that every now and then, the URL for the application load balancer would return a 503 Error, even though the deployment and infrastructure was supposed to be up. A couple of refreshes later and the applicatin would be back. It was unclear why this happened.
+
+
+#### ***5. Improvements***
+
+1. In the interest of readability the script to generate the containerized app could have been written in another file and then called in the jenkinsfile.
+
+2. In the default configurations, two agents were used in addition to the manager. Instead of two agents running Docker and Terraform, one more powerful instance could be used to run both Docker and Terraform.
